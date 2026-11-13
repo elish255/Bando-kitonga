@@ -141,15 +141,14 @@
         payBtn.textContent = T.sending;
 
         try {
-            const body = new URLSearchParams({
-                csrf: window.APP.csrf,
-                package: selected.id,
-                provider,
-                phone: '0' + local
-            });
-            const res = await fetch('pay.php', {
+            const res = await fetch('/api/collect', {
                 method: 'POST',
-                body,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    package: selected.id,
+                    provider,
+                    phone: '0' + local
+                }),
                 credentials: 'same-origin'
             });
             const data = await res.json().catch(() => ({}));
@@ -161,7 +160,7 @@
                 payBtn.textContent = label;
                 return;
             }
-            currentRef = data.reference;
+            currentRef = data.uuid;
             showState('wait', T.wait_title, T.wait_text.replace('%s', data.phone), [
                 [T.close, 'ghost', closeModal]
             ]);
@@ -190,7 +189,7 @@
 
     async function tick() {
         try {
-            const res = await fetch('status.php?ref=' + encodeURIComponent(currentRef), {
+            const res = await fetch('/api/status?uuid=' + encodeURIComponent(currentRef), {
                 cache: 'no-store'
             });
             const data = await res.json();
