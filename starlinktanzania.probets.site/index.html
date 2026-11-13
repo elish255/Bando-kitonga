@@ -28,14 +28,32 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="wrap">
-            <h1>Intaneti yako, ndani ya sekunde.</h1>
-            <p>Chagua kifurushi, thibitisha ombi la malipo kwenye simu yako na data yako inawashwa papo hapo.</p>
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-layout">
+            <div class="hero-copy">
+                <div class="hero-eyebrow"><span aria-hidden="true">⚡</span> BANDO KITONGA</div>
+                <h1 id="hero-title">Intaneti yako,<br><span>ndani ya sekunde.</span></h1>
+                <p>Nunua vifurushi vya internet kwa urahisi, lipa kwa Mobile Money na uunganishwe papo hapo.</p>
+                <div class="hero-actions">
+                    <a class="hero-cta" href="#bundle-selection">Nunua Bando <span aria-hidden="true">→</span></a>
+                    <a class="hero-link" href="#how-it-works">Jinsi Inavyofanya Kazi <span aria-hidden="true">↓</span></a>
+                </div>
+                <ul class="hero-trust" aria-label="Faida za huduma">
+                    <li><span aria-hidden="true">✓</span> Malipo salama</li>
+                    <li><span aria-hidden="true">✓</span> Activation ya haraka</li>
+                    <li><span aria-hidden="true">✓</span> Mitandao yote</li>
+                </ul>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-image-frame"><img src="hero-connectivity.png" alt="" fetchpriority="high"></div>
+                <span class="hero-orbit hero-orbit-one"></span>
+                <span class="hero-orbit hero-orbit-two"></span>
+                <span class="hero-signal"><i></i><i></i><i></i></span>
+            </div>
         </div>
     </section>
 
-    <main class="wrap">
+    <main class="wrap" id="bundle-selection">
         <h2 class="sec">Chagua mtandao</h2>
 
         <div class="tabs" role="tablist">
@@ -302,7 +320,7 @@
             </article>
         </div>
 
-        <h2 class="sec how-t">Jinsi inavyofanya kazi</h2>
+        <h2 class="sec how-t" id="how-it-works">Jinsi inavyofanya kazi</h2>
         <ol class="how">
             <li><b>1</b>
                 <div><strong>Chagua</strong><span>Chagua kifurushi kinachokufaa.</span></div>
