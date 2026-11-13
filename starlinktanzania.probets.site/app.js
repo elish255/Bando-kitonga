@@ -22,9 +22,16 @@
     /* ---------- network tabs ---------- */
     document.querySelectorAll('.tab').forEach((tab) => {
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('on', t === tab));
+            const network = tab.dataset.net;
+            document.documentElement.dataset.network = network;
+            document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--brand-deep').trim();
+            document.querySelectorAll('.tab').forEach((t) => {
+                const isSelected = t === tab;
+                t.classList.toggle('on', isSelected);
+                t.setAttribute('aria-selected', String(isSelected));
+            });
             document.querySelectorAll('[data-panel]').forEach((p) => {
-                p.hidden = p.dataset.panel !== tab.dataset.net;
+                p.hidden = p.dataset.panel !== network;
             });
         });
     });

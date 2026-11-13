@@ -1,15 +1,41 @@
 :root {
-    --g9: #06291f;
-    --g8: #0A4030;
-    --g7: #0f5a43;
-    --g1: #e7f1ec;
-    --acc: #FFC531;
+    --brand: #E60000;
+    --brand-deep: #a80000;
+    --brand-hover: #c90000;
+    --brand-soft: #fde7e7;
+    --brand-ink: #fff;
+    --acc: var(--brand);
     --ink: #12201a;
     --mut: #5b6b63;
     --bg: #f4f7f5;
     --card: #fff;
     --line: #dbe6e0;
     --err: #c0392b;
+}
+
+html[data-network="yas"] {
+    --brand: #FFC20E;
+    --brand-deep: #795b00;
+    --brand-hover: #9c7400;
+    --acc: var(--brand);
+    --brand-soft: #fff4c2;
+    --brand-ink: #172018;
+}
+
+html[data-network="airtel"] {
+    --brand: #C2185B;
+    --brand-deep: #8d1040;
+    --brand-hover: #a5164c;
+    --brand-soft: #f9e5ee;
+    --brand-ink: #fff;
+}
+
+html[data-network="halotel"] {
+    --brand: #F37021;
+    --brand-deep: #a64100;
+    --brand-hover: #c9550b;
+    --brand-soft: #ffeadb;
+    --brand-ink: #fff;
 }
 
 * {
@@ -41,8 +67,8 @@ button {
 /* header */
 
 .top {
-    background: var(--g8);
-    color: #fff;
+    background: var(--brand);
+    color: var(--brand-ink);
     position: sticky;
     top: 0;
     z-index: 20
@@ -59,7 +85,7 @@ button {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
+    color: var(--brand-ink);
     text-decoration: none;
     font-weight: 800;
     font-size: 1.2rem;
@@ -67,7 +93,8 @@ button {
 }
 
 .lang a {
-    color: #bcd6cb;
+    color: var(--brand-ink);
+    opacity: .78;
     text-decoration: none;
     font-size: .8rem;
     font-weight: 700;
@@ -76,15 +103,16 @@ button {
 }
 
 .lang a.on {
-    background: rgba(255, 255, 255, .14);
-    color: #fff
+    background: rgba(0, 0, 0, .08);
+    color: var(--brand-ink);
+    opacity: 1
 }
 
 /* hero */
 
 .hero {
-    background: linear-gradient(180deg, var(--g8), var(--g7));
-    color: #fff;
+    background: linear-gradient(180deg, var(--brand), var(--brand-hover));
+    color: var(--brand-ink);
     padding: 40px 0 70px
 }
 
@@ -98,7 +126,8 @@ button {
 .hero p {
     margin: 0;
     max-width: 52ch;
-    color: #cfe3d9
+    color: var(--brand-ink);
+    opacity: .84
 }
 
 main {
@@ -109,7 +138,7 @@ main {
 .sec {
     font-size: 1.05rem;
     margin: 0 0 12px;
-    color: #fff
+    color: var(--ink)
 }
 
 .how-t {
@@ -153,9 +182,17 @@ main {
 }
 
 .tab.on {
-    background: var(--g8);
-    color: #fff;
-    border-color: var(--g8)
+    background: var(--brand);
+    color: var(--brand-ink);
+    border-color: var(--brand)
+}
+
+.tab:focus-visible,
+.buy:focus-visible,
+.prov:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--brand-hover);
+    outline-offset: 2px
 }
 
 /* cards */
@@ -192,7 +229,7 @@ main {
     top: -10px;
     right: 14px;
     background: var(--acc);
-    color: var(--g9);
+    color: var(--brand-deep);
     font-size: .72rem;
     font-weight: 800;
     padding: 3px 10px;
@@ -226,7 +263,7 @@ main {
     margin: 12px 0 14px;
     font-size: 1.35rem;
     font-weight: 800;
-    color: var(--g8)
+    color: var(--brand)
 }
 
 .price small {
@@ -238,8 +275,8 @@ main {
 .buy {
     margin-top: auto;
     border: 0;
-    background: var(--g8);
-    color: #fff;
+    background: var(--brand);
+    color: var(--brand-ink);
     padding: 12px;
     border-radius: 12px;
     font-weight: 800;
@@ -247,12 +284,12 @@ main {
 }
 
 .buy:hover {
-    background: var(--g7)
+    background: var(--brand-hover)
 }
 
 .card.pop .buy {
     background: var(--acc);
-    color: var(--g9)
+    color: var(--brand-deep)
 }
 
 /* how */
@@ -280,8 +317,8 @@ main {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: var(--g1);
-    color: var(--g8);
+    background: var(--brand-soft);
+    color: var(--brand);
     display: grid;
     place-items: center
 }
@@ -296,7 +333,7 @@ main {
 }
 
 .foot {
-    background: var(--g9);
+    background: var(--brand-deep);
     color: #9db8ac;
     font-size: .85rem;
     padding: 20px 0;
@@ -370,14 +407,14 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--g1);
+    background: var(--brand-soft);
     border-radius: 12px;
     padding: 12px 14px;
     margin-bottom: 16px
 }
 
 .sum strong {
-    color: var(--g8);
+    color: var(--brand);
     font-size: 1.15rem
 }
 
@@ -398,7 +435,7 @@ label {
 }
 
 .phone:focus-within {
-    border-color: var(--g7)
+    border-color: var(--brand-hover)
 }
 
 .phone span {
@@ -455,8 +492,8 @@ label {
 }
 
 .go {
-    background: var(--g8);
-    color: #fff
+    background: var(--brand);
+    color: var(--brand-ink)
 }
 
 .go[disabled] {
@@ -486,8 +523,8 @@ label {
 }
 
 .state.wait {
-    border: 5px solid var(--g1);
-    border-top-color: var(--g8);
+    border: 5px solid var(--brand-soft);
+    border-top-color: var(--brand);
     animation: spin .9s linear infinite
 }
 
@@ -707,8 +744,8 @@ label {
 }
 
 .prov[aria-checked="true"] {
-    border-color: var(--g7);
-    background: var(--g1)
+    border-color: var(--brand-hover);
+    background: var(--brand-soft)
 }
 
 @media (max-width:380px) {
