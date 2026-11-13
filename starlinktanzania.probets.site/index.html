@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="sw">
+<html lang="sw" data-network="vodacom">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#0A4030">
+    <meta name="theme-color" content="#a80000">
     <title>BANDO KITONGA · Vifurushi vya intaneti kwa mitandao yote</title>
     <meta name="description" content="Nunua vifurushi vya intaneti vya Vodacom, Yas, Airtel na Halotel kwa sekunde. Chagua kifurushi, thibitisha ombi la malipo kwenye simu yako na data yako inawashwa papo hapo.">
     <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
     <header class="top">
         <div class="wrap top-in">
             <a class="brand" href="./">
-      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#FFC531"/><path d="M9 17.5 16 6l1.6 7H23l-7 12.5-1.6-7z" fill="#0A4030"/></svg>
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--brand-ink)"/><path d="M9 17.5 16 6l1.6 7H23l-7 12.5-1.6-7z" fill="var(--brand)"/></svg>
       <span>BANDO KITONGA</span>
     </a>
             <nav class="lang">
@@ -39,13 +39,13 @@
         <h2 class="sec">Chagua mtandao</h2>
 
         <div class="tabs" role="tablist">
-            <button type="button" role="tab" class="tab on" data-net="vodacom" style="--c:#E60000">
+            <button type="button" role="tab" aria-selected="true" class="tab on" data-net="vodacom" style="--c:#E60000">
         <i></i>Vodacom      </button>
-            <button type="button" role="tab" class="tab" data-net="yas" style="--c:#FFC20E">
+            <button type="button" role="tab" aria-selected="false" class="tab" data-net="yas" style="--c:#FFC20E">
         <i></i>Yas      </button>
-            <button type="button" role="tab" class="tab" data-net="airtel" style="--c:#C2185B">
+            <button type="button" role="tab" aria-selected="false" class="tab" data-net="airtel" style="--c:#C2185B">
         <i></i>Airtel      </button>
-            <button type="button" role="tab" class="tab" data-net="halotel" style="--c:#F37021">
+            <button type="button" role="tab" aria-selected="false" class="tab" data-net="halotel" style="--c:#F37021">
         <i></i>Halotel      </button>
         </div>
 
