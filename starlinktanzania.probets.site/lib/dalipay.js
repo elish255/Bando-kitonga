@@ -1,6 +1,6 @@
 const API_BASE_URL = 'https://app.dalipay.co.tz/api/v1';
 
-const PACKAGE_PRICES = [3500, 6000, 8500, 10000, 14500, 20500];
+const BUNDLE_CATALOG = require('./catalog');
 const PROVIDERS = {
   vodacom: 'Mpesa',
   yas: 'Tigo',
@@ -79,8 +79,16 @@ function parseJsonBody(req) {
 }
 
 function packageAmount(packageId) {
-  const match = typeof packageId === 'string' && packageId.match(/^(?:vodacom|yas|airtel|halotel)-([1-6])$/);
-  return match ? PACKAGE_PRICES[Number(match[1]) - 1] : null;
+  if (typeof packageId !== 'string') return null;
+
+  for (const network of Object.values(BUNDLE_CATALOG)) {
+    for (const group of network.groups) {
+      const bundle = group.packages.find((item) => item.id === packageId);
+      if (bundle) return bundle.price;
+    }
+  }
+
+  return null;
 }
 
 function normalizePhone(value) {

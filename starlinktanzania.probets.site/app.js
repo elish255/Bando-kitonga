@@ -110,7 +110,86 @@
         });
     }
 
-    document.querySelectorAll('.buy').forEach((b) => b.addEventListener('click', () => openModal(b)));
+    function renderNetworkMenu(panel, networkKey, network) {
+        panel.replaceChildren();
+        panel.classList.add('network-menu');
+
+        const poster = document.createElement('figure');
+        poster.className = 'network-poster';
+        const image = document.createElement('img');
+        image.src = network.image;
+        image.alt = network.alt;
+        image.loading = networkKey === 'vodacom' ? 'eager' : 'lazy';
+        image.decoding = 'async';
+        poster.appendChild(image);
+        panel.appendChild(poster);
+
+        const disclosure = document.createElement('details');
+        disclosure.className = 'offer-disclosure';
+        const summary = document.createElement('summary');
+        summary.textContent = 'Chagua kifurushi cha kulipia';
+        disclosure.appendChild(summary);
+
+        const groups = document.createElement('div');
+        groups.className = 'offer-groups';
+        network.groups.forEach((group) => {
+            const section = document.createElement('section');
+            section.className = 'offer-group';
+            const heading = document.createElement('h3');
+            heading.textContent = group.title;
+            section.appendChild(heading);
+
+            const offers = document.createElement('div');
+            offers.className = 'offer-grid';
+            group.packages.forEach((bundle) => {
+                const card = document.createElement('article');
+                card.className = 'offer-card';
+
+                const details = document.createElement('div');
+                details.className = 'offer-info';
+                const label = document.createElement('strong');
+                label.textContent = bundle.label;
+                details.appendChild(label);
+                if (bundle.duration) {
+                    const duration = document.createElement('span');
+                    duration.textContent = bundle.duration;
+                    details.appendChild(duration);
+                }
+
+                const price = document.createElement('span');
+                price.className = 'offer-price';
+                price.textContent = `TSh ${bundle.price.toLocaleString('en-US')}`;
+
+                const buy = document.createElement('button');
+                buy.type = 'button';
+                buy.className = 'buy offer-buy';
+                buy.textContent = 'Nunua';
+                buy.dataset.id = bundle.id;
+                buy.dataset.netkey = networkKey;
+                buy.dataset.net = network.name;
+                buy.dataset.data = bundle.label + (bundle.duration ? ` · ${bundle.duration}` : '');
+                buy.dataset.price = price.textContent;
+
+                card.append(details, price, buy);
+                offers.appendChild(card);
+            });
+            section.appendChild(offers);
+            groups.appendChild(section);
+        });
+        disclosure.appendChild(groups);
+        panel.appendChild(disclosure);
+        panel.classList.add('menu-ready');
+    }
+
+    document.querySelectorAll('.grid[data-panel]').forEach((panel) => {
+        const networkKey = panel.dataset.panel;
+        const network = window.BUNDLE_CATALOG[networkKey];
+        if (network) renderNetworkMenu(panel, networkKey, network);
+        panel.addEventListener('click', (event) => {
+            const button = event.target.closest('.buy');
+            if (button && panel.contains(button)) openModal(button);
+        });
+    });
     $('m-x').addEventListener('click', closeModal);
     $('m-cancel').addEventListener('click', closeModal);
     overlay.addEventListener('click', (e) => {
