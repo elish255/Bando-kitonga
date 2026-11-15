@@ -1086,11 +1086,28 @@ html {
     }
     .hero-visual {
         order: 1;
-        min-height: clamp(250px, 70vw, 340px);
-        margin: -4px -20px -12px;
+        min-height: 0;
+        margin: 8px -20px -12px;
+        filter: none;
     }
     .hero-image-frame {
-        inset: -16px 0 -18px;
+        position: relative;
+        inset: auto;
+        overflow: visible;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+    .hero-image-frame .hero-art {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        clip-path: none;
+        object-fit: contain;
+    }
+    .hero-orbit,
+    .hero-signal {
+        display: none;
     }
     .hero h1 {
         max-width: none;
