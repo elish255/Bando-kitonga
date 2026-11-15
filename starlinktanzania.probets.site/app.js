@@ -126,8 +126,9 @@
 
         const disclosure = document.createElement('details');
         disclosure.className = 'offer-disclosure';
+        disclosure.open = true;
         const summary = document.createElement('summary');
-        summary.textContent = 'Chagua kifurushi cha kulipia';
+        summary.textContent = 'Vifurushi vyote — gusa Nunua kulipia';
         disclosure.appendChild(summary);
 
         const groups = document.createElement('div');
