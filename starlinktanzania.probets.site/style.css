@@ -768,8 +768,10 @@ html {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: 560px;
-    padding: 76px 0 88px;
+    display: grid;
+    align-items: center;
+    min-height: 600px;
+    padding: 56px 0 64px;
     color: #fff;
     background: linear-gradient(112deg, #071126 0%, #0a2453 48%, #24175e 100%);
 }
@@ -788,6 +790,7 @@ html {
     background-image: radial-gradient(circle, rgba(78, 218, 255, .85) 1px, transparent 1.7px), linear-gradient(115deg, transparent 0 58%, rgba(83, 129, 255, .12) 58.1%, transparent 58.35% 67%, rgba(83, 129, 255, .1) 67.1%, transparent 67.35%);
     background-size: 46px 46px, 100% 100%;
     mask-image: linear-gradient(90deg, transparent, #000 48%, #000);
+    animation: network-drift 24s linear infinite;
 }
 
 .hero::after {
@@ -802,10 +805,13 @@ html {
 
 .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, .92fr);
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
     align-items: center;
-    gap: 32px;
+    gap: clamp(20px, 3.5vw, 52px);
     position: relative;
+    width: 100%;
+    max-width: 1440px;
+    padding-inline: clamp(20px, 4vw, 64px);
 }
 
 .hero-copy {
@@ -833,10 +839,10 @@ html {
 }
 
 .hero h1 {
-    max-width: 13ch;
+    max-width: none;
     margin: 26px 0 18px;
     color: #fff;
-    font-size: clamp(2.8rem, 5.2vw, 4.6rem);
+    font-size: clamp(2.6rem, 4.4vw, 4rem);
     font-weight: 800;
     line-height: 1.04;
     letter-spacing: -.055em;
@@ -909,14 +915,23 @@ html {
 .hero-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 7px;
+    min-height: 54px;
+    padding: 0 18px;
+    border: 1px solid rgba(224, 234, 255, .34);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .04);
     color: #e0eaff;
     font-size: .94rem;
     font-weight: 700;
     text-decoration: none;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
 }
 
 .hero-link:hover {
+    border-color: rgba(140, 234, 255, .7);
+    background: rgba(255, 255, 255, .08);
     color: #8ceaff;
 }
 
@@ -952,28 +967,31 @@ html {
 .hero-visual {
     position: relative;
     min-width: 0;
-    min-height: 390px;
+    min-height: 500px;
+    filter: drop-shadow(0 18px 46px rgba(18, 103, 255, .2));
     animation: hero-enter .85s .12s cubic-bezier(.2, .75, .25, 1) both;
 }
 
 .hero-image-frame {
     position: absolute;
-    inset: -35px -42px -45px -18px;
+    inset: -28px -34px -38px -24px;
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 84%, transparent 100%), linear-gradient(0deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 84%, transparent 100%), linear-gradient(0deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 92%, transparent 100%), linear-gradient(0deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 92%, transparent 100%), linear-gradient(0deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
 }
 
-.hero-image-frame img {
+.hero-image-frame .hero-art {
+    position: absolute;
+    top: 0;
+    right: 0;
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: none;
     height: 100%;
-    object-fit: cover;
-    object-position: 66% center;
-    mix-blend-mode: screen;
-    opacity: .94;
+    clip-path: inset(0 0 0 58%);
+    object-fit: contain;
 }
 
 .hero-orbit {
@@ -1035,6 +1053,10 @@ html {
     to { opacity: 1; rotate: 8deg; }
 }
 
+@keyframes network-drift {
+    to { background-position: 92px 46px, 0 0; }
+}
+
 @keyframes signal-pulse {
     from { opacity: .45; }
     to { opacity: 1; }
@@ -1052,27 +1074,28 @@ html {
 @media (max-width: 760px) {
     .hero {
         min-height: 0;
-        padding: 54px 0 38px;
+        padding: 42px 0 24px;
     }
     .hero-layout {
         grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
+        gap: 8px;
+        padding-inline: 20px;
     }
     .hero-copy {
         order: 0;
     }
     .hero-visual {
         order: 1;
-        min-height: clamp(210px, 62vw, 320px);
-        margin: -6px -16px -16px;
+        min-height: clamp(250px, 70vw, 340px);
+        margin: -4px -20px -12px;
     }
     .hero-image-frame {
-        inset: -26px 0 -24px;
+        inset: -16px 0 -18px;
     }
     .hero h1 {
-        max-width: 14ch;
-        margin: 18px 0 12px;
-        font-size: clamp(2.4rem, 9vw, 3.5rem);
+        max-width: none;
+        margin: 16px 0 10px;
+        font-size: clamp(2.1rem, 7.4vw, 3rem);
     }
     .hero p {
         display: block;
@@ -1080,15 +1103,18 @@ html {
         font-size: .97rem;
     }
     .hero-actions {
-        gap: 18px;
-        margin-top: 22px;
+        align-items: stretch;
+        gap: 10px;
+        margin-top: 18px;
     }
-    .hero-cta {
-        min-height: 50px;
+    .hero-cta,
+    .hero-link {
+        width: 100%;
+        min-height: 48px;
     }
     .hero-trust {
         gap: 10px 16px;
-        margin-top: 20px;
+        margin-top: 16px;
         font-size: .76rem;
     }
     #bundle-selection {
@@ -1100,13 +1126,16 @@ html {
 
 @media (max-width: 380px) {
     .hero {
-        padding-top: 40px;
+        padding-top: 34px;
     }
     .hero-visual {
-        min-height: 205px;
+        min-height: 230px;
+    }
+    .hero h1 {
+        font-size: clamp(1.9rem, 8vw, 2.35rem);
     }
     .hero-actions {
-        gap: 14px;
+        gap: 10px;
     }
     .hero-link {
         font-size: .84rem;
@@ -1121,6 +1150,7 @@ html {
     html {
         scroll-behavior: auto;
     }
+    .hero::before,
     .hero-copy,
     .hero-visual,
     .hero-orbit,
@@ -1128,7 +1158,8 @@ html {
         animation: none !important;
     }
     .hero-cta,
-    .hero-cta span {
+    .hero-cta span,
+    .hero-link {
         transition: none;
     }
 }
