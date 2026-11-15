@@ -1149,6 +1149,10 @@ html {
     gap: 16px;
 }
 
+.grid.network-menu[hidden] {
+    display: none;
+}
+
 .network-poster {
     margin: 0;
     overflow: hidden;
