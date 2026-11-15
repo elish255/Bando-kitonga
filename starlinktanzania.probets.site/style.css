@@ -1181,6 +1181,64 @@ html {
     }
 }
 
+/* ---------- full-width hero banner with functional image controls ---------- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.hero-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    background: #061b66;
+}
+
+.hero-banner-art {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hero-banner-action {
+    position: absolute;
+    top: 59.5%;
+    height: 9.6%;
+    border-radius: 999px;
+    outline-offset: 3px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hero-banner-action:focus-visible {
+    outline: 3px solid #fff;
+}
+
+.hero-banner-buy {
+    left: 3.4%;
+    width: 22.3%;
+}
+
+.hero-banner-how {
+    left: 26.9%;
+    width: 22%;
+}
+
+@media (max-width: 600px) {
+    .hero-banner-action {
+        top: 59.5%;
+        height: 9.6%;
+    }
+}
+
 /* ---------- network bundle posters and purchase choices ---------- */
 
 .grid[data-panel] {
