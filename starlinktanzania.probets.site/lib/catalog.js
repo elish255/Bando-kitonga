@@ -2,7 +2,10 @@
   const catalog = {
     vodacom: {
       name: 'Vodacom',
-      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000001d08211b68b49d0d530de1d-TPUhkzPgnMNMF7moo9HefMHY5tc4Rq.png',
+      image: 'assets/network-posters/vodacom.webp',
+      imageSet: 'assets/network-posters/640/vodacom.webp 640w, assets/network-posters/vodacom.webp 1280w',
+      imageWidth: 1280,
+      imageHeight: 1280,
       alt: 'Picha ya vifurushi vya Vodacom SME: Data Plan na Combo Plan',
       groups: [
         {
@@ -33,7 +36,10 @@
     },
     yas: {
       name: 'Yas',
-      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000049a88211b26b99cfb9a0640a-aqdg1T3SWC6fsFii1uukSxhtrDWbit.png',
+      image: 'assets/network-posters/yas.webp',
+      imageSet: 'assets/network-posters/640/yas.webp 640w, assets/network-posters/yas.webp 1280w',
+      imageWidth: 1280,
+      imageHeight: 1280,
       alt: 'Picha ya vifurushi vya Yas: internet na combo',
       groups: [
         {
@@ -60,7 +66,10 @@
     },
     airtel: {
       name: 'Airtel',
-      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_000000006c448211810564355a10656a-hX8MizhlbsRoRGKfoTuBrsJCX295TI.png',
+      image: 'assets/network-posters/airtel.webp',
+      imageSet: 'assets/network-posters/640/airtel.webp 640w, assets/network-posters/airtel.webp 1280w',
+      imageWidth: 1280,
+      imageHeight: 1280,
       alt: 'Picha ya vifurushi vya Airtel: data na combo',
       groups: [
         {
@@ -86,7 +95,10 @@
     },
     halotel: {
       name: 'Halotel',
-      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_0000000013fc8207a93cc9b2ab973980-a0eMVhW50tRs0FO3CEBgaK2945cAFN.png',
+      image: 'assets/network-posters/halotel.webp',
+      imageSet: 'assets/network-posters/640/halotel.webp 640w, assets/network-posters/halotel.webp 1280w',
+      imageWidth: 1280,
+      imageHeight: 1235,
       alt: 'Picha ya vifurushi vya Halotel Wiki 2 na Mwezi Mmoja',
       groups: [
         {

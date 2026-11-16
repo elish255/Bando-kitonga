@@ -117,10 +117,15 @@
         const poster = document.createElement('figure');
         poster.className = 'network-poster';
         const image = document.createElement('img');
-        image.src = network.image;
         image.alt = network.alt;
-        image.loading = networkKey === 'vodacom' ? 'eager' : 'lazy';
+        image.width = network.imageWidth;
+        image.height = network.imageHeight;
+        image.sizes = '(max-width: 1040px) calc(100vw - 32px), 1008px';
+        image.srcset = network.imageSet;
+        image.loading = networkKey === document.documentElement.dataset.network ? 'eager' : 'lazy';
         image.decoding = 'async';
+        image.fetchPriority = networkKey === document.documentElement.dataset.network ? 'auto' : 'low';
+        image.src = network.image;
         poster.appendChild(image);
         panel.appendChild(poster);
 
