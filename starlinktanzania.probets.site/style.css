@@ -1204,19 +1204,54 @@ html {
     position: relative;
     width: 100%;
     overflow: hidden;
-    line-height: 0;
-    background: #061b66;
+    background: #07132f;
+}
+
+.hero-stage {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    aspect-ratio: 16 / 8.5;
+    min-height: 260px;
+    overflow: hidden;
+    color: #fff;
+    background: #07132f;
+    touch-action: pan-y;
+}
+
+.hero-slides,
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide[hidden] {
+    display: none;
+}
+
+.hero-banner-art,
+.hero-video {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .hero-banner-art {
-    display: block;
-    width: 100%;
-    height: auto;
+    object-fit: cover;
 }
+
+.hero-video {
+    background: #07132f;
+    object-fit: cover;
+}
+
 
 .hero-banner-action {
     position: absolute;
     top: 59.5%;
+    z-index: 2;
     height: 9.6%;
     border-radius: 999px;
     outline-offset: 3px;
@@ -1237,10 +1272,175 @@ html {
     width: 22%;
 }
 
+.hero-shade {
+    position: absolute;
+    z-index: 1;
+    inset: 30% 0 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 12, 28, .28) 36%, rgba(5, 12, 28, .88) 100%);
+}
+
+.hero-bottom {
+    position: absolute;
+    z-index: 2;
+    right: clamp(16px, 4vw, 52px);
+    bottom: clamp(38px, 6vw, 68px);
+    left: clamp(16px, 4vw, 52px);
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    gap: 20px;
+    line-height: 1.4;
+}
+
+
+.hero-controls {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+    background: rgba(7, 19, 47, .58);
+    backdrop-filter: blur(14px);
+}
+
+.hero-control {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color .18s ease, transform .18s ease;
+}
+
+.hero-control:hover {
+    transform: scale(1.06);
+    background: rgba(255, 255, 255, .18);
+}
+
+.hero-control:focus-visible,
+.hero-dot:focus-visible,
+.hero-banner-action:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.hero-control svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.hero-control .icon-play path {
+    fill: currentColor;
+    stroke: none;
+}
+
+.hero-control .icon-play,
+.hero-control .icon-sound {
+    display: none;
+}
+
+.hero-controls.is-paused .icon-play,
+.hero-controls.is-sound-on .icon-sound {
+    display: block;
+}
+
+.hero-controls.is-paused .icon-pause,
+.hero-controls.is-sound-on .icon-muted {
+    display: none;
+}
+
+.hero-pagination {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 14px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .56);
+    cursor: pointer;
+    transition: width .2s ease, background-color .2s ease;
+}
+
+.hero-dot.is-active {
+    width: 24px;
+    background: #fff;
+}
+
 @media (max-width: 600px) {
-    .hero-banner-action {
-        top: 59.5%;
-        height: 9.6%;
+    .hero-stage {
+        aspect-ratio: 16 / 10.5;
+        min-height: 290px;
+    }
+
+    .hero-bottom {
+        right: 14px;
+        bottom: 38px;
+        left: 14px;
+        align-items: end;
+        gap: 10px;
+    }
+
+    .hero-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 48px;
+        padding: 4px;
+        border-radius: 24px;
+    }
+
+    .hero-control {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero-control:nth-child(1),
+    .hero-control:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-stage {
+        min-height: 270px;
+    }
+
+    .hero-controls {
+        width: 42px;
+    }
+
+    .hero-control {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-control,
+    .hero-dot {
+        transition: none;
     }
 }
 
