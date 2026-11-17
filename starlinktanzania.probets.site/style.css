@@ -142,6 +142,13 @@ main {
     color: var(--ink)
 }
 
+#bundle-selection > .sec {
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    font-weight: 900;
+    letter-spacing: .02em;
+    text-transform: uppercase
+}
+
 .how-t {
     color: var(--ink);
     margin-top: 34px
