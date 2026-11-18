@@ -29,10 +29,51 @@
     </header>
 
     <section class="hero-banner" aria-labelledby="hero-title">
-        <h1 class="sr-only" id="hero-title">Intaneti yako, ndani ya sekunde</h1>
-        <img class="hero-banner-art" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_000000006a008211861d59853e6a283c-MddxWcAaIihJh8wJqTUzZLSY15rMr5.png" alt="Bando Kitonga: nunua vifurushi vya intaneti, lipa kwa Mobile Money, na uunganishwe papo hapo." fetchpriority="high">
-        <a class="hero-banner-action hero-banner-buy" href="#bundle-selection" aria-label="Nunua bando"></a>
-        <a class="hero-banner-action hero-banner-how" href="#how-it-works" aria-label="Jinsi inavyofanya kazi"></a>
+        <h1 class="sr-only" id="hero-title">Maelekezo ya kutumia Bando Kitonga</h1>
+        <div class="hero-stage" id="hero-stage" data-kind="image" role="region" aria-roledescription="carousel" aria-label="Video na maelekezo ya Bando Kitonga">
+            <div class="hero-slides" aria-live="off">
+                <div class="hero-slide is-active" data-slide="0" data-kind="image" aria-hidden="false">
+                    <img class="hero-banner-art" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/file_000000006a008211861d59853e6a283c-MddxWcAaIihJh8wJqTUzZLSY15rMr5.png" alt="Bando Kitonga: nunua vifurushi vya intaneti, lipa kwa Mobile Money, na uunganishwe papo hapo." fetchpriority="high">
+                    <a class="hero-banner-action hero-banner-buy" href="#bundle-selection" aria-label="Nunua bando"></a>
+                    <a class="hero-banner-action hero-banner-how" href="#how-it-works" aria-label="Jinsi inavyofanya kazi"></a>
+                </div>
+                <div class="hero-slide" data-slide="1" data-kind="video" aria-hidden="true" hidden>
+                    <video class="hero-video" playsinline muted preload="metadata" aria-label="Maelekezo ya Bando Kitonga, video ya kwanza">
+                        <source src="assets/instructional-videos/choose-bundle.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="hero-slide" data-slide="2" data-kind="video" aria-hidden="true" hidden>
+                    <video class="hero-video" playsinline muted preload="metadata" aria-label="Maelekezo ya Bando Kitonga, video ya pili">
+                        <source src="assets/instructional-videos/pay-for-bundle.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="hero-shade" aria-hidden="true"></div>
+            <div class="hero-bottom">
+                <div class="hero-controls" aria-label="Vidhibiti vya video">
+                    <button type="button" class="hero-control" id="hero-previous" aria-label="Slide iliyotangulia" title="Slide iliyotangulia">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <button type="button" class="hero-control" id="hero-play" aria-label="Sitisha mzunguko wa video" title="Sitisha mzunguko wa video">
+                        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+                        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 10 6-10 6z"/></svg>
+                    </button>
+                    <button type="button" class="hero-control" id="hero-sound" aria-label="Washa sauti" aria-pressed="false" title="Washa sauti">
+                        <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4zM16 9l5 6m0-6-5 6"/></svg>
+                        <svg class="icon-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7m3-10a9 9 0 0 1 0 13"/></svg>
+                    </button>
+                    <button type="button" class="hero-control" id="hero-next" aria-label="Slide inayofuata" title="Slide inayofuata">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-pagination" id="hero-pagination" aria-label="Chagua video">
+                <button type="button" class="hero-dot is-active" data-go-to="0" aria-label="Slide ya kwanza: Bando Kitonga" aria-pressed="true"></button>
+                <button type="button" class="hero-dot" data-go-to="1" aria-label="Slide ya pili: video ya maelekezo ya kwanza" aria-pressed="false"></button>
+                <button type="button" class="hero-dot" data-go-to="2" aria-label="Slide ya tatu: video ya maelekezo ya pili" aria-pressed="false"></button>
+            </div>
+            <span class="sr-only" id="hero-status" aria-live="polite"></span>
+        </div>
     </section>
 
     <main class="wrap" id="bundle-selection">

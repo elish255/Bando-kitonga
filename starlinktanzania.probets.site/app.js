@@ -13,6 +13,153 @@
     const POLL_MS = 3000,
         POLL_MAX_MS = 150000;
 
+    /* ---------- instructional hero carousel ---------- */
+    const heroStage = $('hero-stage');
+    if (heroStage) {
+        const slides = Array.from(heroStage.querySelectorAll('.hero-slide'));
+        const videos = slides.map((slide) => slide.querySelector('video')).filter(Boolean);
+        const dots = Array.from(heroStage.querySelectorAll('.hero-dot'));
+        const controls = heroStage.querySelector('.hero-controls');
+        const playButton = $('hero-play');
+        const soundButton = $('hero-sound');
+        const status = $('hero-status');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const titles = [
+            'Vifurushi vya intaneti kwa mitandao yote',
+            'Jifunze kuchagua kifurushi kinachokufaa',
+            'Angalia maelekezo ya kulipia kifurushi'
+        ];
+        let activeSlide = 0;
+        let soundEnabled = false;
+        let carouselPaused = false;
+        let slideTimer = null;
+        let pointerStartX = null;
+
+        function updateCarouselControls() {
+            controls.classList.toggle('is-paused', carouselPaused);
+            controls.classList.toggle('is-sound-on', soundEnabled);
+            playButton.setAttribute('aria-label', carouselPaused ? 'Endelea kucheza video' : 'Sitisha mzunguko wa video');
+            playButton.title = carouselPaused ? 'Endelea kucheza video' : 'Sitisha mzunguko wa video';
+            soundButton.setAttribute('aria-pressed', String(soundEnabled));
+            soundButton.setAttribute('aria-label', soundEnabled ? 'Zima sauti' : 'Washa sauti');
+            soundButton.title = soundEnabled ? 'Zima sauti' : 'Washa sauti';
+        }
+
+        function clearSlideTimer() {
+            window.clearTimeout(slideTimer);
+            slideTimer = null;
+        }
+
+        function moveToSlide(index, announce = true) {
+            clearSlideTimer();
+            activeSlide = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, slideIndex) => {
+                const isActive = slideIndex === activeSlide;
+                slide.hidden = !isActive;
+                slide.classList.toggle('is-active', isActive);
+                slide.setAttribute('aria-hidden', String(!isActive));
+                const video = slide.querySelector('video');
+                if (video) {
+                    if (!isActive) {
+                        video.pause();
+                        video.currentTime = 0;
+                    } else {
+                        video.muted = !soundEnabled;
+                        video.currentTime = 0;
+                    }
+                }
+            });
+
+            dots.forEach((dot, dotIndex) => {
+                const isActive = dotIndex === activeSlide;
+                dot.classList.toggle('is-active', isActive);
+                dot.setAttribute('aria-pressed', String(isActive));
+            });
+
+            const activeVideo = slides[activeSlide].querySelector('video');
+            heroStage.dataset.kind = slides[activeSlide].dataset.kind;
+            if (announce) status.textContent = `Slide ${activeSlide + 1} kati ya ${slides.length}: ${titles[activeSlide]}`;
+
+            if (carouselPaused || reducedMotion.matches) {
+                updateCarouselControls();
+                return;
+            }
+
+            if (activeVideo) {
+                const playPromise = activeVideo.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        carouselPaused = true;
+                        status.textContent = 'Gusa kitufe cha kucheza ili kuanza video.';
+                        updateCarouselControls();
+                    });
+                }
+            } else {
+                slideTimer = window.setTimeout(() => moveToSlide(activeSlide + 1, false), 7000);
+            }
+            updateCarouselControls();
+        }
+
+        $('hero-previous').addEventListener('click', () => {
+            carouselPaused = false;
+            moveToSlide(activeSlide - 1);
+        });
+        $('hero-next').addEventListener('click', () => {
+            carouselPaused = false;
+            moveToSlide(activeSlide + 1);
+        });
+        dots.forEach((dot) => dot.addEventListener('click', () => {
+            carouselPaused = false;
+            moveToSlide(Number(dot.dataset.goTo));
+        }));
+        playButton.addEventListener('click', () => {
+            carouselPaused = !carouselPaused;
+            if (!carouselPaused) {
+                moveToSlide(activeSlide, false);
+            } else {
+                clearSlideTimer();
+                const activeVideo = slides[activeSlide].querySelector('video');
+                if (activeVideo) activeVideo.pause();
+                updateCarouselControls();
+            }
+        });
+        soundButton.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            videos.forEach((video) => { video.muted = !soundEnabled; });
+            if (soundEnabled) {
+                const activeVideo = slides[activeSlide].querySelector('video');
+                if (activeVideo && activeVideo.paused && !carouselPaused) activeVideo.play().catch(() => {});
+            }
+            updateCarouselControls();
+        });
+        videos.forEach((video) => {
+            video.addEventListener('ended', () => {
+                if (!carouselPaused && slides[activeSlide].contains(video)) moveToSlide(activeSlide + 1, false);
+            });
+            video.addEventListener('error', () => {
+                if (!slides[activeSlide].contains(video)) return;
+                status.textContent = 'Video haikuweza kupakiwa. Inajaribu slide inayofuata.';
+                slideTimer = window.setTimeout(() => moveToSlide(activeSlide + 1, false), 2500);
+            });
+        });
+        heroStage.addEventListener('pointerdown', (event) => {
+            if (event.target.closest('button, a')) return;
+            pointerStartX = event.clientX;
+        });
+        heroStage.addEventListener('pointerup', (event) => {
+            if (pointerStartX === null) return;
+            const distance = event.clientX - pointerStartX;
+            pointerStartX = null;
+            if (Math.abs(distance) < 45) return;
+            carouselPaused = false;
+            moveToSlide(activeSlide + (distance < 0 ? 1 : -1));
+        });
+        heroStage.addEventListener('pointercancel', () => { pointerStartX = null; });
+        updateCarouselControls();
+        moveToSlide(0, false);
+    }
+
     let selected = null,
         provider = null,
         pollTimer = null,
